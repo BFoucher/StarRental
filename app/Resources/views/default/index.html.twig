@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% for category in categories %}
+        <div class="col-xs-12 col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center bigger"><strong>{{ category[0].name }}</strong></h3>
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+                <div class="panel-footer">
+                    <p class="text-right label label-primary "><span class="biggest"> {{ category[1] }}</span><span> Dispo.</span> </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,138 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Booking
+ *
+ * @ORM\Table(name="booking")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BookingRepository")
+ */
+class Booking
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateStart", type="date")
+     */
+    private $dateStart;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateEnd", type="date")
+     */
+    private $dateEnd;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="Outclassed", type="boolean")
+     */
+    private $outclassed;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Ship")
+     */
+    private $ship;
+
+    /**
+     * @var
+     *
+     * @ORM\ManyToOne(targetEntity="Customer")
+     */
+    private $customer;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dateStart
+     *
+     * @param \DateTime $dateStart
+     * @return Booking
+     */
+    public function setDateStart($dateStart)
+    {
+        $this->dateStart = $dateStart;
+
+        return $this;
+    }
+
+    /**
+     * Get dateStart
+     *
+     * @return \DateTime 
+     */
+    public function getDateStart()
+    {
+        return $this->dateStart;
+    }
+
+    /**
+     * Set dateEnd
+     *
+     * @param \DateTime $dateEnd
+     * @return Booking
+     */
+    public function setDateEnd($dateEnd)
+    {
+        $this->dateEnd = $dateEnd;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEnd
+     *
+     * @return \DateTime 
+     */
+    public function getDateEnd()
+    {
+        return $this->dateEnd;
+    }
+
+    /**
+     * Set outclassed
+     *
+     * @param boolean $outclassed
+     * @return Booking
+     */
+    public function setOutclassed($outclassed)
+    {
+        $this->outclassed = $outclassed;
+
+        return $this;
+    }
+
+    /**
+     * Get outclassed
+     *
+     * @return boolean 
+     */
+    public function getOutclassed()
+    {
+        return $this->outclassed;
+    }
+}
