@@ -21,12 +21,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><i class="fa fa-rocket"></i> Star Rental  MASTER BRANCH</a>
+            <a class="navbar-brand" href="#"><i class="fa fa-rocket"></i> Star Rental</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
                 <li><a href="#about">La Flotte</a></li>
+                <li><a href="{{ path('customer_index') }}">Clients</a></li>
                 <li><a href="#contact">Disponibilité</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -45,7 +46,6 @@
         </div>
     </div>
         {% block body %}{% endblock %}
-
 </div>
 
 
