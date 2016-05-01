@@ -30,7 +30,8 @@ class LoadShipData implements FixtureInterface
             $ship = new Ship();
             $ship->setName($names[array_rand($names)]);
             $ship->setCategory($shipCategories[rand(0,1)]);
-            if($ship->getCategory() === $xWing){
+            $ship->setAvailable(rand(0,1));
+            if($ship->getCategory() === $tieFighter){
                 $ship->setColor($colors[array_rand($colors)]);
             }
             $manager->persist($ship);

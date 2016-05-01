@@ -84,6 +84,7 @@ class ShipController extends Controller
     public function editAction(Request $request, Ship $ship)
     {
         $deleteForm = $this->createDeleteForm($ship);
+        ($ship->getCategory()->getName()=='TieFighter' ? $form = 'TieFighterType' : $form='ShipType');
         $editForm = $this->createForm('AppBundle\Form\ShipType', $ship);
         $editForm->handleRequest($request);
 

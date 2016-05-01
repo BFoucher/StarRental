@@ -8,6 +8,7 @@
             <tr>
                 <th>Id</th>
                 <th>Name</th>
+                <th>Available</th>
                 <th>Color</th>
                 <th>Actions</th>
             </tr>
@@ -17,6 +18,7 @@
             <tr>
                 <td><a href="{{ path('ship_show', { 'id': ship.id }) }}">{{ ship.id }}</a></td>
                 <td>{{ ship.name }}</td>
+                <td>{% if ship.available %}Yes{% else %}No{% endif %}</td>
                 <td>{{ ship.color }}</td>
                 <td>
                     <ul>

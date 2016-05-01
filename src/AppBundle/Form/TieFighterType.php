@@ -1,12 +1,11 @@
 <?php
 
 namespace AppBundle\Form;
-
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ShipType extends AbstractType
+class TieFighterType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,9 +14,7 @@ class ShipType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('category')
-            ->add('available')
+            ->add('color')
         ;
     }
 
@@ -29,5 +26,9 @@ class ShipType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Ship'
         ));
+    }
+
+    public function getParent(){
+        return new ShipType();
     }
 }

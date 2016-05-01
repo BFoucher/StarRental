@@ -14,6 +14,10 @@
                 <td>{{ ship.name }}</td>
             </tr>
             <tr>
+                <th>Available</th>
+                <td>{% if ship.available %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
                 <th>Color</th>
                 <td>{{ ship.color }}</td>
             </tr>
