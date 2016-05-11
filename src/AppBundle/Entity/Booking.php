@@ -40,7 +40,7 @@ class Booking
      *
      * @ORM\Column(name="Outclassed", type="boolean")
      */
-    private $outclassed;
+    private $outclassed = 0;
 
     /**
      * @var

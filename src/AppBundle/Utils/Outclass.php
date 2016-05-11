@@ -1,15 +1,17 @@
 <?php
 namespace AppBundle\Utils;
+use AppBundle\Entity\Customer;
 use AppBundle\Entity\Ship;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 
 //TODO : replace category'id by scaling category
 class Outclass
 {
     protected $em;
     protected $ship;
-    protected $xWing = 6; // id of xWing  category
-    protected $tieFighter = 5; //id of TieFighter category
+    protected $xWing = 4; // id of xWing  category
+    protected $tieFighter = 3; //id of TieFighter category
 
 
     public function __construct(\Doctrine\ORM\EntityManager $em)
@@ -17,14 +19,22 @@ class Outclass
         $this->em = $em;
     }
 
-    public function canOutclass(Ship $ship){
-        if ($this->shipCategoryAvailable($this->xWing,15)){
-            if (!$this->shipCategoryAvailable($this->tieFighter,50)){
-                //TODO: Check Customer recent booking
-                return true;
-            }
+    public function canOutclass(Ship $ship, Customer $customer){
+        //Check if less than 15% of xWing are available
+        if (!$this->shipCategoryAvailable($this->xWing,15)){
+            return false;
         }
-        return false;
+        //Check if more than 50% of TieFighter are avilable
+        if ($this->shipCategoryAvailable($this->tieFighter,50)){
+            return false;
+        }
+        //Check if customer book 3 or more ship last 30days.
+        if ($this->customerBookingLastMonth($customer) < 3){
+            return false;
+        };
+
+
+        return true;
     }
 
     public function shipCategoryAvailable($category,$limit){
@@ -39,5 +49,11 @@ class Outclass
             return true;
         }
         return false;
+    }
+    
+    public function customerBookingLastMonth($customer){
+        $nbBooking = $this->em->getRepository('AppBundle:Booking')->countBookingLastMonth($customer->getId());
+
+        return $nbBooking;
     }
 }

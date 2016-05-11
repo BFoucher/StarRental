@@ -10,18 +10,36 @@ use Symfony\Component\HttpFoundation\Request;
 class AjaxController extends Controller
 {
     /**
-     * @Route("/outclass/{ship}", name="outclass")
+     * @Route("/outclass/", name="outclass")
      */
-    public function canOutclassAction(Request $request,$ship)
+    public function canOutclassAction(Request $request)
     {
-        //TODO : Check Ajax request
-        //TODO : get Customer for check last booking
-        //TODO : add Message in Json Repsonse
-        $ship = $this->getDoctrine()->getManager()->getRepository('AppBundle:Ship')->find($ship);
+        //Check Ajax request
+        if (!$request->isXmlHttpRequest()){
+            return $this->redirectToRoute('booking_index');
+        };
 
-        $canOutclass = $this->get('app.outclass')->canOutclass($ship);
+        $em = $this->getDoctrine()->getManager();
+        $ship = $request->request->get('ship');
+        $ship = $em->getRepository('AppBundle:Ship')->find($ship);
+        $customer = $request->request->get('customer');
+        $customer = $em->getRepository('AppBundle:Customer')->find($customer);
+
+
+        $canOutclass = $this->get('app.outclass')->canOutclass($ship,$customer);
+        
         $response = new JsonResponse();
-        $response->setData(array('outclass' => $canOutclass));
+        if ($canOutclass){
+            $response->setData(array(
+                'outclass' => true,
+                'msg'=>'M. Han Solo a le droit d’être surclassé sur les TieFighters'
+            ));
+        }else{
+            $response->setData(array(
+                'outclass' => false,
+                'msg'=>'M. Han Solo ne peut être surclassé sur les TieFighters et doit donc rester sur les XWing '
+            ));
+        }
         return $response;
     }
 }
