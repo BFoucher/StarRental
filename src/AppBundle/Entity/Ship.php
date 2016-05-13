@@ -29,6 +29,12 @@ class Ship
     private $name;
 
     /**
+     * @var bool
+     * @ORM\Column(name="available", type="boolean")
+     */
+    private $available;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="color", type="string", length=7, nullable=true)
@@ -75,26 +81,26 @@ class Ship
     }
 
     /**
-     * Set category
+     * Set available
      *
-     * @param \AppBundle\Entity\ShipCategory $category
+     * @param boolean $available
      * @return Ship
      */
-    public function setCategory(\AppBundle\Entity\ShipCategory $category = null)
+    public function setAvailable($available)
     {
-        $this->category = $category;
+        $this->available = $available;
 
         return $this;
     }
 
     /**
-     * Get category
+     * Get available
      *
-     * @return \AppBundle\Entity\ShipCategory 
+     * @return boolean 
      */
-    public function getCategory()
+    public function getAvailable()
     {
-        return $this->category;
+        return $this->available;
     }
 
     /**
@@ -118,5 +124,36 @@ class Ship
     public function getColor()
     {
         return $this->color;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \AppBundle\Entity\ShipCategory $category
+     * @return Ship
+     */
+    public function setCategory(\AppBundle\Entity\ShipCategory $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \AppBundle\Entity\ShipCategory 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
     }
 }

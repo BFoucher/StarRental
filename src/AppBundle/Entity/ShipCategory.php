@@ -91,4 +91,9 @@ class ShipCategory
     {
         return $this->scale;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
