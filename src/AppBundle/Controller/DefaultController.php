@@ -15,8 +15,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository('AppBundle:ShipCategory')->getAllWithShip();
-
-        dump($categories);
+        
         return $this->render('default/index.html.twig', array(
             'categories' => $categories,
         ));
