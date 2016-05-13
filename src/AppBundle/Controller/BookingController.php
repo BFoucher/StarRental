@@ -26,7 +26,7 @@ class BookingController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $bookings = $em->getRepository('AppBundle:Booking')->findAll();
+        $bookings = $em->getRepository('AppBundle:Booking')->getAll('DESC');
 
         return $this->render('booking/index.html.twig', array(
             'bookings' => $bookings,

@@ -28,4 +28,12 @@ class BookingRepository extends EntityRepository
 
         return $result = $query->getSingleScalarResult();
     }
+
+    public function getAll($order = 'DESC'){
+        $query = $this->createQueryBuilder('b')
+            ->orderBy('b.id',$order)
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }
