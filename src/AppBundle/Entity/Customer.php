@@ -91,4 +91,9 @@ class Customer
     {
         return $this->lastname;
     }
+
+    public function __toString()
+    {
+        return $this->firstname.' '.$this->lastname;
+    }
 }

@@ -12,5 +12,22 @@ use Doctrine\ORM\EntityRepository;
  */
 class ShipRepository extends EntityRepository
 {
+    public function countNbCatAvailable($cat){
+        $query = $this->createQueryBuilder('ship')
+                ->select('COUNT(ship)')
+                ->where('ship.category = :category')
+                ->andWhere('ship.available = true')
+                ->setParameter(':category',$cat)
+                ->getQuery();
+        return $query->getSingleScalarResult();
+    }
 
+    public function countNbCat($cat){
+        $query = $this->createQueryBuilder('ship')
+            ->select('COUNT(ship)')
+            ->where('ship.category = :category')
+            ->setParameter(':category',$cat)
+            ->getQuery();
+        return $query->getSingleScalarResult();
+    }
 }

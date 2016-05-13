@@ -12,4 +12,28 @@ use Doctrine\ORM\EntityRepository;
  */
 class BookingRepository extends EntityRepository
 {
+    public function countBookingLastMonth($customerId){
+        $d = new \DateTime();
+        $d->modify( 'last month' );
+
+
+        $query = $this->createQueryBuilder('b')
+            ->select('COUNT(b)')
+            ->innerJoin('AppBundle:Customer','c','WITH','c.id = b.customer')
+            ->where('c.id = :customerId')
+            ->andWhere('b.dateStart >= :dateLastMonth')
+            ->setParameter(':customerId',$customerId)
+            ->setParameter(':dateLastMonth',$d->format('Y-m-d'))
+            ->getQuery();
+
+        return $result = $query->getSingleScalarResult();
+    }
+
+    public function getAll($order = 'DESC'){
+        $query = $this->createQueryBuilder('b')
+            ->orderBy('b.id',$order)
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }
